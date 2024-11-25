@@ -11,6 +11,8 @@ Carefully consider the topics and content of the text and identify at least 5 su
 
 - Each tag should be lower case
 
+- Every tag should start with a # symbol
+
 - Tags should not contain spaces. If a tag contains a space replace it with an underscore.
 
 - Do not give warnings or notes; only output the requested info.
