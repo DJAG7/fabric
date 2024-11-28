@@ -619,8 +619,8 @@
                    
 
                 </div>
-                <button class="submit-btn"
-                    onclick="handleSubmit()">Submit</button>
+                <button class="submit-btn" onclick="handleSubmit()">Submit</button>
+
                 <div class="spinner" id="spinner"></div>
                 <div id="output" class="output-box"></div>
             </div>
@@ -1704,19 +1704,6 @@ write_nuclei_template_rule: `
         </ul>`
 
     }
-    /* const patternPlaceholders = {
-        "ai": "Enter text for AI processing",
-        "ai_long": "Enter longer text for detailed AI analysis"
-    };
-
-    document.getElementById("pattern").addEventListener("change", function () {
-        const selectedPattern = this.value;
-        const textarea = document.getElementById("input");
-
-        // Update placeholder based on selected pattern
-        textarea.placeholder = patternPlaceholders[selectedPattern] || "Enter your text here...";
-    }); */
-
     document.addEventListener("DOMContentLoaded", () => {
 
     $(document).ready(function () {
@@ -1899,6 +1886,8 @@ write_nuclei_template_rule: `
                 document.getElementById("helpText").innerHTML = helpfiles[selectedPattern] || "No Help Available for this Pattern.";
                 
             }
+    })
+
 
         });
     });
@@ -1966,7 +1955,7 @@ write_nuclei_template_rule: `
         }
     }
 
-    async function handleSubmit() {
+        async function handleSubmit() {
         const fileMode = document.getElementById("fileUploadMode").classList.contains("active");
         const spinner = document.getElementById("spinner");
         const outputBox = document.getElementById("output");
@@ -2052,31 +2041,19 @@ write_nuclei_template_rule: `
     });
 
     
-  
-
-
-
-
-
-    
-
-
-
-
-
     const helpPopUp = document.querySelector("#helpPopUp");
-    document.getElementById("helpButton").addEventListener("click", ()=>{
+document.getElementById("helpButton").addEventListener("click", () => {
+    if (helpPopUp.style.display === "flex") {
+        helpPopUp.style.display = "none";
+    } else {
+        helpPopUp.style.display = "flex";
+        const pattern = document.getElementById("pattern").value;
+        console.log(pattern);
+        const helpText = document.getElementById("helpText");
+        helpText.innerHTML = helpfiles[pattern] || "No Help Available for this Pattern";
+    }
+});
 
-    helpPopUp.style.display = "flex";
-    const pattern = document.getElementById("pattern").value;
-    console.log(pattern);
-    const helpText = document.getElementById("helpText")
-    helpText.innerHTML = helpfiles[pattern] || "No Help Available for this Pattern"
-    
-
-    
-
-    })
 
 
     document.getElementById("helpPopUpCloseBtn").addEventListener("click", ()=>{
@@ -2085,12 +2062,6 @@ write_nuclei_template_rule: `
         
 
     })
-
-})
-
-    
-    
-
 
 </script>
 </html>
