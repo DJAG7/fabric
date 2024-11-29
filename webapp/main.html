@@ -1,40 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fabric.ai</title>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.3/dist/tesseract.min.js"></script>
-<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pptxgenjs"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fabric.ai</title>
+        <script
+            src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.3/dist/tesseract.min.js"></script>
+        <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/pptxgenjs"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+            rel="stylesheet" />
+        <script
+            src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+            rel="stylesheet" />
+        <script
+            src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-
-
-<style>
+        <style>
     /* General Reset */
     body {
+
         margin: 0;
         padding: 0;
         font-family: 'Century Gothic', 'Arial', sans-serif;
         background-color: #2e2e2e;
         color: #333;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
     }
 
     /* Header Styling */
     header {
         display: flex;
         align-items: center;
-        padding: 20px 30px;
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-bottom: 10px;
         background-color: #123f6d;
         color: #fff;
         font-size: 28px;
         font-family: 'Helvetica Superbold', 'Arial Black', sans-serif;
         font-weight: bold;
+        width: 100%;
     }
 
     header::before {
@@ -44,9 +63,23 @@
         vertical-align: middle;
     }
 
+    .main-container{
+
+        display: Flex;
+        justify-content: center;
+        align-items: start;
+        /* width:80%; */
+        /* border: 1px solid green; */
+        gap: 20px;
+        padding: 10px;
+         
+    }
+
     /* Container Styling */
     .container {
-        max-width: 600px;
+        
+        max-width: 40vw;
+        min-width: 35vw;
         margin: 20px auto;
         padding: 20px;
         background-color: #e4dfdf;
@@ -54,8 +87,11 @@
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     }
 
+    
+
     .form-group {
         margin-bottom: 20px;
+        width: 100%;
     }
 
     .form-group select {
@@ -91,6 +127,23 @@
         outline: none;
         border-color: #2993b9;
     }
+
+    .form-group select {
+
+        width: 100%;
+    }
+
+    .form-group select option{
+
+        width: 100%;
+    }
+
+    .select2-container{
+
+
+        width: 35vw !important;
+    }
+
 
     .submit-btn {
         width: 100%;
@@ -176,209 +229,1733 @@
             transform: rotate(360deg);
         }
     }
+
+    #active-container{
+
+        z-index: 10;
+    }
+
+
+    #helpPopUp{
+
+        /* height: 69.5vh;  */
+        display: none;
+        animation: slideRight 700ms ease-out;
+        z-index: 5;
+        position: relative;
+        flex-direction: column;
+        padding:  0px 10px !important;
+        width: 500px !important;
+        
+
+    }
+
+    .text-input-title{
+
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+
+    }
+
+    #helpButton{
+
+        border: 0.5px solid black;
+        background-color: transparent;
+        color: #333;
+        border-radius: 50px;
+        cursor: pointer;
+        height: 20px;
+    }
+
+    @keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+    #helpPopUpCloseBtn{
+    
+        font-size: 20px;
+        cursor: pointer;
+        position: absolute;
+        right: 15px;
+        top: -15px;
+        /* border: 1px solid red; */
+        height: fit-content;
+
+    }
+
+    #helpText{
+
+        width: 80%;
+        /* border: 1px solid green; */
+    }
+
+    #helpText h3{
+
+        margin-top: 0;
+        margin-bottom: -10px;
+        margin: 0 0px -10px 5px;
+
+    }
+
+    #helpText ul{
+
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    @media (max-width: 599px) {
+
+        .container {
+        
+        
+        min-width: 80vw;
+        /* border: 2px solid red; */
+        
+    
+}
+
+.select2-container{
+
+
+width: 80vw !important;
+}
+
+.main-container{
+
+    flex-direction: column;
+
+}
+
+#helpPopUp{
+
+    position: absolute;
+    width: 110vw;
+    top: 12%;
+    z-index: 20;
+    height: 90vh;
+
+
+}
+
+
+
+
+    }
+
 </style>
-</head>
-<body>
-<header>Fabric.ai</header>
-<div class="container">
-    <div class="toggle-group">
-        <button id="textMode" class="active" onclick="toggleInputMode('text')">Text Input</button>
-        <button id="fileUploadMode" onclick="toggleInputMode('file')">File Upload</button>
-    </div>
+    </head>
+    <body>
+        <header>Fabric.ai</header>
 
-    <div class="form-group" id="textInputGroup">
-        <label for="input">Text Input</label>
-        <textarea id="input" placeholder="Enter your text here..." rows="4"></textarea>
-    </div>
+        <div class="main-container">
 
-    <div class="form-group" id="fileUploadGroup" style="display: none;">
-        <label for="file">Supported formats: .jpeg, .jpg, .png, .docx, .txt, .pdf(BETA)</label>
-        <div class="drag-area" id="dragArea">
-            Drag & Drop File Here or Click to Select
+            <div class="container" id="active-container">
+                <div class="toggle-group">
+                    <button id="textMode" class="active"
+                        onclick="toggleInputMode('text')">Text Input</button>
+                    <button id="fileUploadMode"
+                        onclick="toggleInputMode('file')">File Upload</button>
+                </div>
+
+                <div class="form-group" id="textInputGroup">
+                    <div class="text-input-title">
+                        <label for="input">Text Input</label>
+                        <button id="helpButton">
+
+                            ?
+                        </button>
+                    </div>
+                    <textarea id="input" placeholder="Enter a message to communicate with AI"
+                        rows="4"></textarea>
+                </div>
+
+                <div class="form-group" id="fileUploadGroup"
+                    style="display: none;">
+                    <div class="text-input-title">
+                    <label for="file">Supported formats: .jpeg, .jpg, .png,
+                        .docx, .txt, .pdf(BETA)</label>
+                        <button id="helpButton">
+
+                            ?
+                        </button>
+                    </div>
+                    <div class="drag-area" id="dragArea">
+                        Drag & Drop File Here or Click to Select
+                    </div>
+                    <input type="file" id="file"
+                        accept=".pdf,.ppt,.pptx,.doc,.docx,.txt,image/*"
+                        style="display: none;">
+                    <div id="fileInfo"
+                        style="margin-top: 10px; font-size: 14px; color: #333;"></div>
+                </div>
+
+                <div class="form-group" id="flagGroup">
+                    <label for="flag">Select Input Type</label>
+                    <select class="function_select_dropdown" id="flag">
+                        <option value>Text</option>
+                        <option value="-y">YouTube Link
+                            "With non auto-generated Captions"</option>
+                        <option value="--playlist">YouTube Playlist
+                            "With non auto-generated Captions"</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pattern">Select Function</label>
+                    <select class="function_select_dropdown" id="pattern">
+
+                        <option value="ai">AI</option>
+                        <option value="ai_long">AI (Long Answers)</option>
+                        <option value="analyze_answers">Analyze Answers</option>
+                        <option value="analyze_cfp_submission">Analyze CFP
+                            Submission</option>
+                        <option value="analyze_claims">Analyze Claims</option>
+                        <option value="analyze_comments">Analyze
+                            Comments</option>
+                        <option value="analyze_debate">Analyze Debate</option>
+                        <option value="analyze_email_headers">Analyze Email
+                            Headers</option>
+                        <option value="analyze_incident">Analyze
+                            Incident</option>
+                        <option value="analyze_interviewer_techniques">Analyze
+                            Interviewer Techniques</option>
+                        <option value="analyze_logs">Analyze Logs</option>
+                        <option value="analyze_malware">Analyze Malware</option>
+                        <option value="analyze_military_strategy">Analyze
+                            Military Strategy</option>
+                        <option value="analyze_paper">Analyze Paper</option>
+                        <option value="analyze_patent">Analyze Patent</option>
+                        <option value="analyze_personality">Analyze
+                            Personality</option>
+                        <option value="analyze_presentation">Analyze
+                            Presentation</option>
+                        <option value="analyze_product_feedback">Analyze Product
+                            Feedback</option>
+                        <option value="analyze_proposition">Analyze
+                            Proposition</option>
+                        <option value="analyze_prose">Analyze Prose</option>
+                        <option value="analyze_prose_json">Analyze Prose
+                            JSON</option>
+                        <option value="analyze_prose_pinker">Analyze Prose
+                            (Pinker Style)</option>
+                        <option value="analyze_sales_call">Analyze Sales
+                            Call</option>
+                        <option value="analyze_tech_impact">Analyze Tech
+                            Impact</option>
+                        <option value="analyze_threat_report">Analyze Threat
+                            Report</option>
+                        <option value="analyze_threat_report_trends">Analyze
+                            Threat Report Trends</option>
+                        <option value="answer_interview_question">Answer
+                            Interview Question</option>
+                        <option value="ask_secure_by_design_questions">Ask
+                            Secure by Design Questions</option>
+                        <option value="devops_aws"> AWS DevOps</option>
+                        <option value="devops_azure"> Azure DevOps</option>
+                        <option value="capture_thinkers_work">Capture Thinkers'
+                            Work</option>
+                        <option value="check_agreement">Check Agreement</option>
+                        <option value="clean_text">Clean Text</option>
+                        <option value="coding_master">Coding Master</option>
+                        <option value="compare_and_contrast">Compare and
+                            Contrast</option>
+                        <option value="create_5_sentence_summary">Create a
+                            5-Sentence Summary</option>
+                        <option value="create_academic_paper">Create Academic
+                            Paper</option>
+                        <option value="create_ai_jobs_analysis">Create AI Jobs
+                            Analysis</option>
+                        <option value="create_aphorisms">Create
+                            Aphorisms</option>
+                        <option value="create_art_prompt">Create Art
+                            Prompt</option>
+                        <option value="create_better_frame">Create a Better
+                            Frame</option>
+                        <option value="create_coding_project">Create Coding
+                            Project</option>
+                        <option value="create_command">Create Command</option>
+                        <option value="create_coverletter">Create Cover
+                            Letter</option>
+                        <option value="create_cyber_summary">Create Cyber
+                            Summary</option>
+                        <option value="create_design_document">Create Design
+                            Document</option>
+                        <option value="create_formal_email">Create Formal
+                            Email</option>
+                        <option value="create_git_diff_commit">Create Git Diff
+                            Commit</option>
+                        <option value="create_graph_from_input">Create Graph
+                            from Input</option>
+                        <option value="create_hormozi_offer">Create Hormozi
+                            Offer</option>
+                        <option value="create_idea_compass">Create Idea
+                            Compass</option>
+                        <option
+                            value="create_investigation_visualization">Create
+                            Investigation Visualization</option>
+                        <option value="create_keynote">Create Keynote</option>
+                        <option value="create_markmap_visualization">Create
+                            Markmap Visualization</option>
+                        <option value="create_mermaid_visualization">Create
+                            Mermaid Visualization</option>
+                        <option
+                            value="create_mermaid_visualization_for_github">Create
+                            Mermaid Visualization for GitHub</option>
+                        <option value="create_micro_summary">Create Micro
+                            Summary</option>
+                        <option value="create_network_threat_landscape">Create
+                            Network Threat Landscape</option>
+                        <option value="create_quiz">Create Quiz</option>
+                        <option value="create_reading_plan">Create Reading
+                            Plan</option>
+                        <option value="create_recursive_outline">Create
+                            Recursive Outline</option>
+                        <option value="create_report_finding">Create Report
+                            Finding</option>
+                        <option value="create_resume">Create Resume</option>
+                        <option value="create_rpg_summary">Create RPG
+                            Summary</option>
+                        <option value="create_security_update">Create Security
+                            Update</option>
+                        <option value="create_show_intro">Create Show
+                            Intro</option>
+                        <option value="create_story_explanation">Create Story
+                            Explanation</option>
+                        <option value="create_stride_threat_model">Create STRIDE
+                            Threat Model</option>
+                        <option value="create_tags">Create Tags</option>
+                        <option value="create_threat_scenarios">Create Threat
+                            Scenarios</option>
+                        <option value="create_upgrade_pack">Create Upgrade
+                            Pack</option>
+                        <option value="create_user_story">Create User
+                            Story</option>
+                        <option value="create_video_chapters">Create Video
+                            Chapters</option>
+                        <option value="create_visualization">Create
+                            Visualization</option>
+                        <option value="deploy_web_app">Deploy Web App</option>
+                        <option value="explain_code">Explain Code</option>
+                        <option value="explain_docs">Explain Docs</option>
+                        <option value="explain_math">Explain Math</option>
+                        <option value="explain_project">Explain Project</option>
+                        <option value="explain_terms">Explain Terms</option>
+                        <option value="export_data_as_csv">Export Data as
+                            CSV</option>
+                        <option
+                            value="extract_algorithm_update_recommendations">Extract
+                            Algorithm Update Recommendations</option>
+                        <option value="extract_article_wisdom">Extract Article
+                            Wisdom</option>
+                        <option value="extract_book_ideas">Extract Book
+                            Ideas</option>
+                        <option value="extract_book_recommendations">Extract
+                            Book Recommendations</option>
+                        <option value="extract_business_ideas">Extract Business
+                            Ideas</option>
+                        <option value="extract_controversial_ideas">Extract
+                            Controversial Ideas</option>
+                        <option value="extract_core_message">Extract Core
+                            Message</option>
+                        <option value="extract_ctf_writeup">Extract CTF
+                            Writeup</option>
+                        <option value="extract_extraordinary_claims">Extract
+                            Extraordinary Claims</option>
+                        <option value="extract_ideas">Extract Ideas</option>
+                        <option value="extract_insights">Extract
+                            Insights</option>
+                        <option value="extract_instructions">Extract
+                            Instructions</option>
+                        <option value="extract_jokes">Extract Jokes</option>
+                        <option value="extract_main_idea">Extract Main
+                            Idea</option>
+                        <option value="extract_most_redeeming_thing">Extract
+                            Most Redeeming Thing</option>
+                        <option value="extract_poc">Extract Proof of
+                            Concept</option>
+                        <option value="extract_predictions">Extract
+                            Predictions</option>
+                        <option value="extract_primary_problem">Extract Primary
+                            Problem</option>
+                        <option value="extract_primary_solution">Extract Primary
+                            Solution</option>
+                        <option value="extract_product_features">Extract Product
+                            Features</option>
+                        <option value="extract_questions">Extract
+                            Questions</option>
+                        <option value="extract_recommendations">Extract
+                            Recommendations</option>
+                        <option value="extract_references">Extract
+                            References</option>
+                        <option value="extract_skills">Extract Skills</option>
+                        <option value="extract_song_meaning">Extract Song
+                            Meaning</option>
+                        <option value="extract_videoid">Extract Video
+                            ID</option>
+                        <option value="extract_wisdom">Extract Wisdom</option>
+                        <option value="find_hidden_message">Find Hidden
+                            Message</option>
+                        <option value="find_logical_fallacies">Find Logical
+                            Fallacies</option>
+                        <option value="generate_ideas">Generate Ideas</option>
+                        <option value="get_wow_per_minute">Get WOW per
+                            Minute</option>
+                        <option value="devops"> GCP DevOps</option>
+                        <option value="identify_dsrp_distinctions">Identify DSRP
+                            Distinctions</option>
+                        <option value="identify_dsrp_perspectives">Identify DSRP
+                            Perspectives</option>
+                        <option value="identify_dsrp_relationships">Identify
+                            DSRP Relationships</option>
+                        <option value="identify_dsrp_systems">Identify DSRP
+                            Systems</option>
+                        <option value="identify_job_stories">Identify Job
+                            Stories</option>
+                        <option value="improve_academic_writing">Improve
+                            Academic Writing</option>
+                        <option value="improve_prompt">Improve Prompt</option>
+                        <option value="improve_report_finding">Improve Report
+                            Finding</option>
+                        <option value="improve_writing">Improve Writing</option>
+                        <option value="label_and_rate">Label and Rate</option>
+                        <option value="prepare_7s_strategy">Prepare 7S
+                            Strategy</option>
+                        <option value="provide_guidance">Provide
+                            Guidance</option>
+                        <option value="rate_content">Rate Content</option>
+                        <option value="rate_value">Rate Value</option>
+                        <option value="raw_query">Raw Query</option>
+                        <option value="raycast">Raycast</option>
+                        <option value="recommend_artists">Recommend
+                            Artists</option>
+                        <option value="recommend_pipeline_upgrades">Recommend
+                            Pipeline Upgrades</option>
+                        <option value="recommend_talkpanel_topics">Recommend
+                            Talk Panel Topics</option>
+                        <option value="solve_with_cot">Solve with Chain of
+                            Thought</option>
+                        <option value="summarize">Summarize</option>
+                        <option value="summarize_debate">Summarize
+                            Debate</option>
+                        <option value="summarize_lecture">Summarize
+                            Lecture</option>
+                        <option value="summarize_legislation">Summarize
+                            Legislation</option>
+                        <option value="summarize_micro">Summarize Micro</option>
+                        <option value="summarize_newsletter">Summarize
+                            Newsletter</option>
+                        <option value="summarize_paper">Summarize Paper</option>
+                        <option value="summarize_prompt">Summarize
+                            Prompt</option>
+                        <option value="test_result">Test Result</option>
+                        <option value="to_flashcards">Convert to
+                            Flashcards</option>
+                        <option value="transcribe_minutes">Transcribe
+                            Minutes</option>
+                        <option value="translate">Translate to English</option>
+                        <option value="translate_in_hindi">Translate to
+                            Hindi</option>
+                        <option value="translate_in_marathi">Translate to
+                            Marathi </option>
+                        <option value="tweet">Tweet</option>
+                        <option value="write_code">Write Code</option>
+                        <option value="write_essay">Write an Essay</option>
+                        <option value="write_hackerone_report">Write HackerOne
+                            Report</option>
+                        <option value="write_latex">Write LaTeX</option>
+                        <option value="write_micro_essay">Write Micro
+                            Essay</option>
+                        <option value="write_nuclei_template_rule">Write Nuclei
+                            Template Rule</option>
+
+                    </select>
+
+                   
+
+                </div>
+                <button class="submit-btn" onclick="handleSubmit()">Submit</button>
+
+                <div class="spinner" id="spinner"></div>
+                <div id="output" class="output-box"></div>
+            </div>
+
+            <div class="container" id="helpPopUp">
+
+                <p id="helpPopUpCloseBtn">&times</p>
+
+                <p id="helpText">
+                    <!-- - This is help Text Lorem ipsum dolor <br> -
+                    Similique maiores magni necessitatibus dolorum <br>- nulla
+                    tempore libero deleniti fuga officiis?<br>- nulla tempore
+                    libero deleniti fuga officiis?<br>- nulla tempore libero
+                    deleniti fuga officiis?<br>- nulla tempore libero deleniti
+                    fuga officiis? -->
+                </p>
+
+            </div>
         </div>
-        <input type="file" id="file" accept=".pdf,.ppt,.pptx,.doc,.docx,.txt,image/*" style="display: none;">
-        <div id="fileInfo" style="margin-top: 10px; font-size: 14px; color: #333;"></div>
-    </div>
 
-    <div class="form-group" id="flagGroup">
-        <label for="flag">Select Input Type</label>
-        <select class="function_select_dropdown" id="flag">
-            <option value="">Text</option>
-            <option value="-y">YouTube Link "With non auto-generated Captions"</option>
-            <option value="--playlist">YouTube Playlist "With non auto-generated Captions"</option>
-        </select>
-    </div>
+    </body>
+
+    <script>
 
 
+const helpfiles ={
+ai: `
+        <h3> AI </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to provide a brief answer based on the message inputted.</li>
+            <li>Expect a 4-5 line output for the topic given.</li>
+        </ul>`,
+ai_long: `
+        <h3> AI Long </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to provide a long answer based on the message inputted.</li>
+            <li>Expect a large detailed response based on the input given.</li>
+        </ul>`,
+analyze_answers: `
+        <h3> Analyze Answers </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze answers based on their relevance to the topic or question asked.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_cfp_submission: `
+        <h3> Analyze CFP Submission </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to provide CFP submission details for analysis.</li>
+            <li>It examines the content for clarity, relevance, and adherence to guidelines.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_claims: `
+        <h3> Analyze Claims </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze claims made in the text to check their validity.</li>
+            <li>It identifies supporting evidence and potential inconsistencies.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_comments: `
+        <h3> Analyze Comments </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to assess comments for tone, subject matter, and relevance.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_debate: `
+        <h3> Analyze Debate </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze a debate by evaluating arguments and strategies present in the transcript or text.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_email_headers: `
+        <h3> Analyze Email Headers </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to paste email headers for analysis.</li>
+            <li>It extracts critical information for security or technical insights.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_incident: `
+        <h3> Analyze Incident </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze log data to identify patterns, issues, or underlying causes of the incident.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_interviewer_techniques: `
+        <h3> Analyze Interviewer Techniques </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to evaluate interviewer techniques by analyzing the transcript of an interview.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_logs: `
+        <h3> Analyze Logs </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze logs via text or files.</li>
+            <li>It identifies patterns, errors, or significant trends within the provided data.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_malwarm: `
+        <h3> Analyze Malware </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze malware data.</li>
+            <li>It examines the behavior, structure, and potential impact of the malware for security assessments.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_military_strategy: `
+        <h3> Analyze Military Strategy </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to enter and evaluate military strategy details.</li>
+            <li>It assesses objectives, effectiveness, and potential outcomes of the provided strategies.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_paper: `
+        <h3> Analyze Paper </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze research paper content for depth, clarity, and contribution to the respective field.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_patent: `
+        <h3> Analyze Patent </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze patent data.</li>
+            <li>It evaluates the innovation, relevance, and possible overlaps with existing patents.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_personality: `
+        <h3> Analyze Personality </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze the personality traits of a person based on their conversation or text.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_presentation: `
+        <h3> Analyze Presentation </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to provide presentation details for critique and suggestions.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_product_feedback: `
+        <h3> Analyze Product Feedback </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze product feedback.</li>
+            <li>It identifies trends, issues, and opportunities for improvement based on the provided input.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_proposition: `
+        <h3> Analyze Proposition </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to describe a proposition to analyze its viability.</li>
+            <li>It evaluates the strengths and potential challenges of the suggested idea.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_prose: `
+        <h3> Analyze Prose </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to paste prose via text to analyze style and content.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_prose_json: `
+        <h3> Analyze Prose JSON </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to provide JSON-structured prose for analysis.</li>
+            <li>It evaluates the content based on the structured input provided.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_prose_pinker: `
+        <h3> Analyze Prose Pinker </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to paste prose for analysis in Pinker style.</li>
+            <li>It examines the style and content according to the specified analytical framework.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_sales_call: `
+        <h3> Analyze Sales Call </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to paste a transcript of a sales call to analyze its effectiveness.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_tech_impact: `
+        <h3> Analyze Tech Impact </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to analyze the tech impact on a proposed or existing solution.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_threat_report: `
+        <h3> Analyze Threat Report </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to provide a threat report for detailed analysis.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+analyze_threat_report_trends: `
+        <h3> Analyze Threat Report Trends </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to enter threat reports to analyze vulnerabilities or security trends.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+answer_interview_question: `
+        <h3> Answer Interview Question </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to enter an interview question to generate an answer as per HR standards.</li>
+            <li>Use data from files or text input for processing.</li>
+            <li>Expect a detailed analysis based on the input given.</li>
+        </ul>`,
+ask_secure_by_design_questions: `
+        <h3> Ask Secure by Design Questions </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to ask secure by design questions for an interview or to assess security.</li>
+        </ul>`,
+devops_aws: `
+        <h3> DevOps AWS </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Input a GitHub link or describe a project to work with DevOps.</li>
+            <li>This will build:</li>
+            <ul style="list-style-type: circle; padding-left: 20px;">
+                <li>Terraform configuration for AWS</li>
+                <li>Dockerfile</li>
+                <li>Kubernetes deployment YAML</li>
+                <li>Jenkinsfile</li>
+            </ul>
+            <li>If data is not accessible using GitHub, it can also build a similar pipeline based on the type of application.</li>
+        </ul>`,
+devops_azure: `
+        <h3> DevOps Azure </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Input a GitHub link or describe a project to work with DevOps.</li>
+            <li>This will build:</li>
+            <ul style="list-style-type: circle; padding-left: 20px;">
+                <li>Terraform configuration for Azure</li>
+                <li>Dockerfile</li>
+                <li>Kubernetes deployment YAML</li>
+                <li>Jenkinsfile</li>
+            </ul>
+            <li>If data is not accessible using GitHub, it can also build a similar pipeline based on the type of application.</li>
+        </ul>`,
+capture_thinkers_work: `
+        <h3> Capture Thinkers Work </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This prompt is used to document or analyze the work of thinkers, including their ideas, methods, and impact.</li>
+            <li>Use Data from Files or Text Input for processing</li>
+            <li>Expect a detailed analysis based on the Input Given</li>
+        </ul>`,
+check_agreement: `
+        <h3> Check Agreement </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide text data to check and verify legal/important agreement across perspectives.</li>
+            <li>Use Data from Files or Text Input for processing</li>
+        </ul>`,
+clean_text: `
+        <h3> Clean Text </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide text data to generate clean and standardized text.</li>
+            <li>Use Data from Files or Text Input for processing</li>
+        </ul>`,
+coding_master: `
+        <h3> Coding Master </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter the Coding language and Simple Instruction for advanced code generation.</li>
+            <li>Use Data from Text Input</li>
+        </ul>`,
+compare_and_contrast: `
+        <h3> Compare and Contrast </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide Data with items or conceptual text to compare and contrast.</li>
+            <li>Use Data from a Single file or Text Input</li>
+        </ul>`,
+create_5_sentence_summary: `
+        <h3> Create 5 Sentence Summary </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter content to generate a concise five-sentence summary.</li>
+            <li>Enter a Text Input to Create a Five-Sentence Summary</li>
+        </ul>`,
+create_academic_paper: `
+        <h3> Create Academic Paper </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide a topic to generate an academic paper draft.</li>
+            <li>Enter a Text Input to Create an Academic Paper</li>
+        </ul>`,
+create_ai_jobs_analysis: `
+        <h3> Create AI Jobs Analysis </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter AI job data for analysis and trends.</li>
+            <li>Enter a Text Input to Create an AI Jobs Analysis</li>
+        </ul>`,
+create_aphorisms: `
+        <h3> Create Aphorisms </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide a theme to generate aphorisms.</li>
+            <li>Enter a Text Input to Create Aphorisms</li>
+        </ul>`,
+create_art_prompt: `
+        <h3> Create Art Prompt </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe art ideas to generate prompts.</li>
+            <li>Enter a Text Input to Create an Art Prompt</li>
+        </ul>`,
+create_better_frame: `
+        <h3> Create Better Frame </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide an argument or idea to reframe it effectively.</li>
+            <li>Enter a Text Input to Create a Better Frame</li>
+        </ul>`,
+create_coding_project: `
+        <h3> Create Coding Project </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe a coding project for structure planning and code generation.</li>
+            <li>Enter a Text Input to Create a Coding Project</li>
+        </ul>`,
+create_command: `
+        <h3> Create Command </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide functionality to generate appropriate commands.</li>
+            <li>Enter a Text Input to Create a Command</li>
+        </ul>`,
+create_coverletter: `
+        <h3> Create Cover Letter </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter job and personal details to generate a cover letter.</li>
+            <li>Enter a Text Input to Create a Cover Letter</li>
+        </ul>`,
+create_cyber_summary: `
+        <h3> Create Cyber Summary </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Creates a cybersecurity summary for your project.</li>
+            <li>Enter a Text Input to Create a Cyber Summary</li>
+        </ul>`,
+create_design_document: `
+        <h3> Create Design Document </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide requirements to generate a design document with Mermaid.</li>
+            <li>Enter a Text Input to Create a Design Document</li>
+        </ul>`,
+create_formal_email: `
+        <h3> Create Formal Email </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe context to draft a formal email.</li>
+            <li>Enter a Text Input to Create a Formal Email</li>
+        </ul>`,
+create_git_diff_commit: `
+        <h3> Create Git Diff Commit </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide code changes to generate a Git diff commit.</li>
+            <li>Enter a Text Input to Create a Git Diff Commit</li>
+        </ul>`,
+create_graph_from_input: `
+        <h3> Create Graph From Input </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter data to generate a graph representation.</li>
+            <li>Enter a Text Input to Create a Graph From Input</li>
+        </ul>`,
+create_hormozi_offer: `
+        <h3> Create Hormozi Offer </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Creates a Hormozi offer based on the formula.</li>
+            <li>Enter a Text Input to Create a Hormozi Offer</li>
+        </ul>`,
+create_idea_compass: `
+        <h3> Create Idea Compass </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide ideas to generate a directional idea compass.</li>
+            <li>Enter a Text Input to Create an Idea Compass</li>
+        </ul>`,
+create_investigation_visualization: `
+        <h3> Create Investigation Visualization </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter investigation details for visualization.</li>
+            <li>Enter a Text Input to Create an Investigation Visualization</li>
+        </ul>`,
+create_keynote: `
+        <h3> Create Keynote </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide topic details to create a keynote presentation.</li>
+            <li>Enter a Text Input to Create a Keynote</li>
+        </ul>`,
+create_markmap_visualization: `
+        <h3> Create Markmap Visualization </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter structured data to create a markmap visualization.</li>
+            <li>Enter a Text Input to Create a Markmap Visualization</li>
+        </ul>`,
+create_mermaid_visualization: `
+        <h3> Create Mermaid Visualization </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide input to generate a mermaid visualization.</li>
+            <li>Enter a Text Input to Create a Mermaid Visualization</li>
+        </ul>`,
+create_mermaid_visualization_for_github: `
+        <h3> Create Mermaid Visualization For GitHub </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe GitHub context for a mermaid visualization or Enter Github Link.</li>
+            <li>Enter a Text Input to Create a Mermaid Visualization For GitHub</li>
+        </ul>`,
+create_micro_summary: `
+        <h3> Create Micro Summary </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Paste content to create a micro-summary.</li>
+            <li>Enter a Text Input to Create a Micro Summary</li>
+        </ul>`,
+create_network_threat_landscape: `
+        <h3> Create Network Threat Landscape </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter network details to create a threat landscape.</li>
+            <li>Enter a Text Input to Create a Network Threat Landscape</li>
+        </ul>`,
+create_quiz: `
+        <h3> Create Quiz </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide topic details to generate a quiz.</li>
+            <li>Enter a Text Input to Create a Quiz</li>
+        </ul>`,
+create_reading_plan: `
+        <h3> Create Reading Plan </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter book or content details to create a reading plan.</li>
+            <li>Enter a Text Input to Create a Reading Plan</li>
+        </ul>`,
+create_recursive_outline: `
+        <h3> Create Recursive Outline </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide content for a recursive outline.</li>
+            <li>Enter a Text Input to Create a Recursive Outline</li>
+        </ul>`,
+create_report_finding: `
+        <h3> Create Report Finding </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter findings to generate a structured report.</li>
+            <li>Enter a Text Input to Create a Report Finding</li>
+        </ul>`,
+create_resume: `
+        <h3> Create Resume </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide personal and professional details to create a resume.</li>
+            <li>Enter a Text Input to Create a Resume</li>
+        </ul>`,
+create_rpg_summary: `
+        <h3> Create RPG Summary </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe RPG details to generate a summary.</li>
+            <li>Enter a Text Input to Create an RPG Summary</li>
+        </ul>`,
+create_security_update: `
+        <h3> Create Security Update </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter security updates to create a structured report.</li>
+            <li>Enter a Text Input to Create a Security Update</li>
+        </ul>`,
+create_show_intro: `
+        <h3> Create Show Intro </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide show details to generate an introduction.</li>
+            <li>Enter a Text Input to Create a Show Intro</li>
+        </ul>`,
+create_story_explanation: `
+        <h3> Create Story Explanation </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter story details to generate an explanation.</li>
+            <li>Enter a Text Input to Create a Story Explanation</li>
+        </ul>`,
+create_stride_threat_model: `
+        <h3> Create STRIDE Threat Model </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide system details to create a STRIDE threat model.</li>
+            <li>Enter a Text Input to Create a STRIDE Threat Model</li>
+        </ul>`,
+create_tags: `
+        <h3> Create Tags </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe content to generate relevant hashtags.</li>
+            <li>Enter a Text Input to Create Tags</li>
+        </ul>`,
+create_threat_scenarios: `
+        <h3> Create Threat Scenarios </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter system or data details to create threat scenarios.</li>
+            <li>Enter a Text Input to Create Threat Scenarios</li>
+        </ul>`,
+create_upgrade_pack: `
+        <h3> Create Upgrade Pack </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe software or features to create an upgrade pack.</li>
+            <li>Enter a Text Input to Create an Upgrade Pack</li>
+        </ul>`,
+create_user_story: `
+        <h3> Create User Story </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide requirements to create a user story.</li>
+            <li>Enter a Text Input to Create a User Story</li>
+        </ul>`,
+create_video_chapters: `
+        <h3> Create Video Chapters </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter a video transcript to generate chapters (does not work with YouTube links).</li>
+            <li>Enter a Text Input to Create Video Chapters</li>
+        </ul>`,
+create_visualization: `
+        <h3> Create Visualization </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide data to create visualizations in plain text.</li>
+            <li>Enter a Text Input to Create a Visualization</li>
+        </ul>`,
+deploy_web_app: `
+        <h3> Deploy Web App </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe a web app to create a deployment.</li>
+            <li>Enter a Text Input to Deploy a Web App</li>
+        </ul>`,
+        explain_code: `
+        <h3> Explain Code </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function provides a detailed explanation of the code provided as input.</li>
+            <li>It analyzes the logic, structure, and purpose of the code to make it clear and understandable.</li>
+            <li>Paste code to generate explanations.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Code Explanation</li>
+        </ul>`,
+explain_docs: `
+        <h3> Explain Documentation </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function simplifies complex documentation into an easy-to-understand explanation.</li>
+            <li>It helps identify key points and provides insights into the material.</li>
+            <li>Provide documentation to create simplified explanations.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Documentation Explanation</li>
+        </ul>`,
+explain_math: `
+        <h3> Explain Math </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function breaks down mathematical problems and provides step-by-step explanations for better understanding.</li>
+            <li>It covers equations, calculations, and logical reasoning.</li>
+            <li>Enter math problems to generate step-by-step explanations via text or LaTeX</li>
+            <li>Accepts Text, File, and YouTube Link Input for Math Explanation</li>
+        </ul>`,
+explain_project: `
+        <h3> Explain Project </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function provides a concise and comprehensive explanation of a project.</li>
+            <li>It describes its purpose, scope, and main components, making it easier to grasp the overall concept.</li>
+            <li>Provide project details for a concise explanation.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Project Explanation</li>
+        </ul>`,
+explain_terms: `
+        <h3> Explain Terms </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function generates definitions and explanations for terms provided as input.</li>
+            <li>It clarifies their meaning and relevance in a specific context.</li>
+            <li>Enter terms to generate definitions and explanations.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Terms Explanation</li>
+        </ul>`,
+export_data_as_csv: `
+        <h3> Export Data as CSV </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Converts data to generate a CSV export.</li>
+            <li>Accepts Text and File inputs</li>
+        </ul>`,
+extract_algorithm_update_recommendations: `
+        <h3> Extract Algorithm Update Recommendations </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function is designed to help you extract update suggestions for algorithms.</li>
+            <li>It analyzes provided algorithm details to generate recommendations for improvements, optimizations, or enhancements.</li>
+            <li>Enter algorithm details to extract update recommendations.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Algorithm Update Extraction</li>
+        </ul>`,
+extract_article_wisdom: `
+        <h3> Extract Article Wisdom </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts the key insights and wisdom from a given article.</li>
+            <li>By analyzing the content, it highlights the most important takeaways and lessons.</li>
+            <li>Paste article content to extract key insights.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Wisdom Extraction from Articles</li>
+        </ul>`,
+extract_book_ideas: `
+        <h3> Extract Book Ideas </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function generates related ideas based on the book details you provide.</li>
+            <li>It helps in brainstorming creative concepts or expanding on existing themes from the book.</li>
+            <li>Provide book details to generate related ideas.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Book Idea Extraction</li>
+        </ul>`,
+extract_book_recommendations: `
+        <h3> Extract Book Recommendations </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function provides book recommendations tailored to your interests or preferences.</li>
+            <li>By analyzing the context you provide, it suggests relevant books based on your description.</li>
+            <li>Describe interests to extract book recommendations.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Book Recommendation Extraction</li>
+        </ul>`,
+extract_business_ideas: `
+        <h3> Extract Business Ideas </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function generates business ideas based on the context and details you provide.</li>
+            <li>It helps brainstorm new ventures or strategies within a business context.</li>
+            <li>Enter business context to generate ideas.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Business Idea Extraction</li>
+        </ul>`,
+extract_controversial_ideas: `
+        <h3> Extract Controversial Ideas </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function identifies and extracts controversial ideas from a given content.</li>
+            <li>It highlights opinions, statements, or arguments that may challenge the status quo.</li>
+            <li>Paste content to extract controversial ideas.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Identifying Controversial Ideas</li>
+        </ul>`,
+extract_core_message: `
+        <h3> Extract Core Message </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function identifies the core message within the provided text.</li>
+            <li>It extracts the main idea or theme to help clarify the purpose or message of the content.</li>
+            <li>Enter text to identify its core message.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Core Message Extraction</li>
+        </ul>`,
+extract_ctf_writeup: `
+        <h3> Extract CTF Write-up </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function helps in generating a write-up based on CTF (Capture The Flag) challenge details.</li>
+            <li>It extracts relevant information to document the challenge and its resolution.</li>
+            <li>Paste CTF challenge details to generate a write-up.</li>
+            <li>Accepts Text, File, and YouTube Link Input for CTF Write-up Generation</li>
+        </ul>`,
+extract_extraordinary_claims: `
+        <h3> Extract Extraordinary Claims </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function identifies extraordinary aspects of claims made in provided content.</li>
+            <li>It highlights statements that stand out as unusual, remarkable, or significant.</li>
+            <li>Provide claims to identify extraordinary aspects.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Extraordinary Claim Extraction</li>
+        </ul>`,
+extract_ideas: `
+        <h3> Extract Ideas </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function generates related ideas based on the content provided.</li>
+            <li>It helps in brainstorming new concepts or expanding on existing ones.</li>
+            <li>Paste text to generate related ideas.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Idea Generation</li>
+        </ul>`,
+extract_insights: `
+        <h3> Extract Insights </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts key insights from the provided content.</li>
+            <li>It identifies significant patterns, observations, or conclusions.</li>
+            <li>Enter content to extract key insights.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Insight Extraction</li>
+        </ul>`,
+extract_instructions: `
+        <h3> Extract Instructions </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts actionable instructions from the text you provide.</li>
+            <li>It helps identify steps or guidance for carrying out specific tasks.</li>
+            <li>Provide text to extract actionable instructions.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Instruction Extraction</li>
+        </ul>`,
+extract_jokes: `
+        <h3> Extract Jokes </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function identifies and extracts humorous elements from provided content.</li>
+            <li>It helps isolate jokes, puns, or witty statements.</li>
+            <li>Paste content to extract humorous elements.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Joke Extraction</li>
+        </ul>`,
+extract_main_idea: `
+        <h3> Extract Main Idea </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function identifies the main idea or central theme within the provided content.</li>
+            <li>It helps clarify the essence of the material.</li>
+            <li>Enter content to identify the main idea.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Main Idea Extraction</li>
+        </ul>`,
+extract_most_redeeming_thing: `
+        <h3> Extract Most Redeeming Thing </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts the most redeeming or valuable aspect from the provided content.</li>
+            <li>It highlights the strongest or most positive feature.</li>
+            <li>Paste content to extract its most redeeming aspect.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Redeeming Aspect Extraction</li>
+        </ul>`,
+extract_poc: `
+        <h3> Extract Proof of Concept (PoC) </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts key details necessary to define a Proof of Concept (PoC).</li>
+            <li>It helps outline the feasibility or demonstration of an idea or concept.</li>
+            <li>Provide concept details to extract proof of concept.</li>
+            <li>Accepts Text, File, and YouTube Link Input for PoC Extraction</li>
+        </ul>`,
+extract_predictions: `
+        <h3> Extract Predictions </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function generates predictions based on the data or content provided.</li>
+            <li>It analyzes trends or information to forecast potential outcomes.</li>
+            <li>Enter data to generate predictions.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Prediction Extraction</li>
+        </ul>`,
+extract_primary_problem: `
+        <h3> Extract Primary Problem </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function identifies the primary problem or issue within a given scenario or context.</li>
+            <li>It helps in understanding the core challenge that needs addressing.</li>
+            <li>Describe scenarios to identify primary problems.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Primary Problem Identification</li>
+        </ul>`,
+extract_primary_solution: `
+        <h3> Extract Primary Solution </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function identifies the primary solution to a given problem or challenge.</li>
+            <li>It helps in outlining the most effective or central solution.</li>
+            <li>Provide problem context to identify primary solutions.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Primary Solution Identification</li>
+        </ul>`,
+extract_product_features: `
+        <h3> Extract Product Features </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts the key features or attributes of a product based on the details provided.</li>
+            <li>It helps outline what makes a product stand out or valuable.</li>
+            <li>Enter product details to extract key features.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Product Feature Extraction</li>
+        </ul>`,
+extract_questions: `
+        <h3> Extract Questions </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function identifies relevant questions from the provided content.</li>
+            <li>It helps extract queries or prompts for further exploration.</li>
+            <li>Paste content to extract relevant questions.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Question Extraction</li>
+        </ul>`,
+extract_recommendations: `
+        <h3> Extract Recommendations </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function generates recommendations based on the data or context you provide.</li>
+            <li>It helps identify actionable suggestions or guidance.</li>
+            <li>Provide data to generate recommendations.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Recommendation Extraction</li>
+        </ul>`,
+extract_references: `
+        <h3> Extract References </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts references, citations, or sources from the provided content.</li>
+            <li>It helps in gathering the supporting materials or evidence mentioned.</li>
+            <li>Enter text to extract references.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Reference Extraction</li>
+        </ul>`,
+extract_skills: `
+        <h3> Extract Skills </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts relevant skills required for a job or task based on the provided content.</li>
+            <li>It helps identify the qualifications or expertise needed.</li>
+            <li>Describe a job or content to extract relevant skills.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Skill Extraction</li>
+        </ul>`,
+extract_song_meaning: `
+        <h3> Extract Song Meaning </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function interprets the meaning behind song lyrics.</li>
+            <li>It analyzes the words to extract themes, messages, or emotional undertones.</li>
+            <li>Paste song lyrics to interpret their meaning.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Song Meaning Interpretation</li>
+        </ul>`,
+extract_videoid: `
+        <h3> Extract Video ID </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts the unique ID of a video from a given URL.</li>
+            <li>It helps isolate the specific identifier used to reference the video.</li>
+            <li>Provide video URL to extract its ID.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Video ID Extraction</li>
+        </ul>`,
+extract_wisdom: `
+        <h3> Extract Wisdom </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function extracts key wisdom and insights from the provided text.</li>
+            <li>It identifies profound or valuable lessons embedded in the content.</li>
+            <li>Enter text to extract its wisdom and key insights.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Wisdom Extraction</li>
+        </ul>`,
+find_hidden_message: `
+        <h3> Find Hidden Message </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide text to identify hidden messages.</li>
+            <li>Accepts Text, File and Youtube Link Input for Hidden Message Extraction.</li>
+        </ul>`,
+find_logical_fallacies: `
+        <h3> Find Logical Fallacies </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter arguments/ text /debate to identify logical fallacies.</li>
+            <li>Accepts Text, File and Youtube Link Input for Logical Fallacy Detection.</li>
+        </ul>`,
+generate_ideas: `
+        <h3> Generate Ideas </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Describe a topic to generate five creative ideas for projects.</li>
+            <li>Enter a Text Input to Generate Ideas.</li>
+        </ul>`,
+get_wow_per_minute: `
+        <h3> Get Wow Per Minute </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Gets Wow Factor, i.e. Generates Surprise, Novelty, Insight, Value, Wisdom and other factors to generate the wow value.</li>
+            <li>Provide content to calculate the WOW rate via a file, youtube link or text input.</li>
+        </ul>`,
+devops: `
+        <h3> DevOps with GCP </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Input a Github Link or Describe a Project to Work with DevOps.</li>
+            <li>This will build 1) Terraform configuration for GCP, 2) Dockerfile, 3) Kubernetes Deployment Yaml, 4) JenkinsFile. If data is not accessible using Github, it can also build a similar pipeline based on the type of Application.</li>
+        </ul>`,
+identify_dsrp_distinctions: `
+        <h3> Identify DSRP Distinctions </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>The DSRP framework stands for Distinctions, Systems, Relationships, and Perspectives. It is a universal model of thinking used to analyze and understand complex systems.</li>
+            <li>Enter content to analyze and identify distinctions as part of the DSRP framework. Accepts both Text and File Input for Identifying DSRP Distinctions.</li>
+        </ul>`,
+identify_dsrp_perspectives: `
+        <h3> Identify DSRP Perspectives </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>The DSRP framework stands for Distinctions, Systems, Relationships, and Perspectives. It is a universal model of thinking used to analyze and understand complex systems.</li>
+            <li>Provide content to analyze and identify perspectives as part of the DSRP framework. Accepts both Text and File Input for Identifying DSRP Perspectives.</li>
+        </ul>`,
+identify_dsrp_relationships: `
+        <h3> Identify DSRP Relationships </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>The DSRP framework stands for Distinctions, Systems, Relationships, and Perspectives. It is a universal model of thinking used to analyze and understand complex systems.</li>
+            <li>Describe systems to analyze and identify relationships as part of the DSRP framework. Accepts both Text and File Input for Identifying DSRP Relationships.</li>
+        </ul>`,
+identify_dsrp_systems: `
+        <h3> Identify DSRP Systems </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>The DSRP framework stands for Distinctions, Systems, Relationships, and Perspectives. It is a universal model of thinking used to analyze and understand complex systems.</li>
+            <li>Enter details to analyze and identify systems as part of the DSRP framework. Accepts both Text and File Input for Identifying DSRP Systems.</li>
+        </ul>`,
 
-    <div class="form-group">
-        <label for="pattern">Select Function</label>
-<select class="function_select_dropdown" id="pattern"> 
+identify_job_stories: `
+        <h3>Identify Job Stories</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide requirements to identify job stories.</li>
+            <li>Accepts both Text and File Input</li>
+        </ul>`,
+improve_academic_writing: `
+        <h3>Improve Academic Writing</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide academic text to improve structure, clarity, references and punctuation.</li>
+            <li>Accepts both Text and File Input</li>
+        </ul>`,
+improve_prompt: `
+        <h3>Improve Prompt</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide AI prompt to improve structure, clarity and references to use for AI.</li>
+            <li>Accepts Text Input</li>
+        </ul>`,
+improve_report_finding: `
+        <h3>Improve Report Finding</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide report findings to refine and improve, assess for clarity, relevance and truth.</li>
+            <li>Accepts both Text and File Input</li>
+        </ul>`,
+improve_writing: `
+        <h3>Improve Writing</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide any kind of written content to refine and improve, assess for clarity, relevance and truth.</li>
+            <li>Accepts both Text and File Input</li>
+        </ul>`,
+label_and_rate: `
+        <h3>Label and Rate</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide content to label and rate based on any criteria.</li>
+            <li>Accepts both Text and File Input</li>
+        </ul>`,
+prepare7s_strategy: `
+        <h3>Prepare 7S Strategy</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Prepare 7S Strategy</li>
+            <li>Enter details to generate a McKinsey 7S strategy.</li>
+            <li>Enter a Text Input to Prepare a 7S Strategy</li>
+        </ul>`,
+provide_guidance: `
+        <h3>Provide Guidance</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide Guidance</li>
+            <li>Enter a question or scenario to receive technical guidance.</li>
+            <li>Enter a Text Input to Receive Guidance</li>
+        </ul>`,
+rate_content: `
+        <h3>Rate Content</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function evaluates and rates the quality of the content provided as input.</li>
+            <li>It considers aspects such as clarity, coherence, and relevance to provide an overall rating.</li>
+            <li>Provide content to evaluate and rate its quality.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Content Rating</li>
+        </ul>`,
+rate_value: `
+        <h3>Rate Value</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function rates the value of an item or service based on the details provided.</li>
+            <li>It considers factors such as utility, effectiveness, and overall worth.</li>
+            <li>Enter details to rate the value of an item or service.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Value Rating</li>
+        </ul>`,
+raw_query: `
+        <h3>Raw Query</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function analyzes a query directly without any pre-processing.</li>
+            <li>It provides insights based on raw, unmodified input.</li>
+            <li>Enter a query for direct, unprocessed analysis.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Raw Query Analysis</li>
+        </ul>`,
+raycast: `
+        <h3>Raycast</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide input to cast ray simulations or projections.</li>
+            <li>Enter a Text Input to Perform Raycasting</li>
+        </ul>`,
+recommend_artists: `
+        <h3>Recommend Artists</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter genre preferences to recommend music artists.</li>
+            <li>Enter a Text Input to Recommend Artists</li>
+        </ul>`,
+recommend_pipeline_upgrades: `
+        <h3>Recommend Pipeline Upgrades</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Modifies Pipeline inputted to create a highly efficient, secure, and scalable pipeline.</li>
+            <li>Streamlines CI-CD processes.</li>
+            <li>Provide a Text/File Input</li>
+        </ul>`,
+recommend_talkpanel_topics: `
+        <h3>Recommend Talkpanel Topics</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter context to recommend topics for discussion panels.</li>
+            <li>Provide a Text Input</li>
+        </ul>`,
+solve_with_cot: `
+        <h3>Solve With Cot</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Solves a Problem using the Chain of Thought Approach Method.</li>
+            <li>This mirrors human reasoning, with problem solving</li>
+        </ul>`,
+summarize: `
+        <h3>Summarize</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter content to create a summary.</li>
+            <li>Accepts both Text and File Input to Summarize Content</li>
+        </ul>`,
+summarize_debate: `
+        <h3>Summarize Debate</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide debate details to generate a concise summary.</li>
+            <li>Accepts both Text and File Input to Summarize a Debate</li>
+        </ul>`,
+summarize_lecture: `
+        <h3>Summarize Lecture</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter lecture details to create a summary.</li>
+            <li>Accepts both Text and File Input to Summarize a Lecture</li>
+        </ul>`,
+summarize_legislation: `
+        <h3>Summarize Legislation</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide legislative text to generate a summary.</li>
+            <li>Accepts both Text and File Input to Summarize Legislation</li>
+        </ul>`,
+summarize_micro: `
+        <h3>Summarize Micro</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter micro-level content to summarize.</li>
+            <li>Accepts both Text and File Input to Summarize Micro Content</li>
+        </ul>`,
+summarize_newsletter: `
+        <h3>Summarize Newsletter</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide newsletter content to generate a summary.</li>
+            <li>Accepts both Text and File Input to Summarize a Newsletter</li>
+        </ul>`,
+summarize_paper: `
+        <h3>Summarize Paper</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter paper details to create a summary.</li>
+            <li>Accepts both Text and File Input to Summarize a Paper</li>
+        </ul>`,
+summarize_prompt: `
+        <h3>Summarize Prompt</h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide a prompt to generate a concise summary.</li>
+            <li>Accepts both Text and File Input to Summarize a Prompt</li>
+        </ul>`,
+        test_result: `
+        <h3> Test Result </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This pattern is created to evaluate the candidates and their personality traits using Big 5 Personality Model.</li>
+            <li>It helps in generating results for the assessment.</li>
+            <li>Accepts both Text and File Input</li>
+        </ul>`,
+to_flashcards: `
+        <h3> To Flashcards </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Generates Text Based Flashcards based on the content provided.</li>
+            <li>This can help with memory and help with studying capabilities</li>
+            <li>Accepts Text, File, and YouTube Link Input</li>
+        </ul>`,
+transcribe_minutes: `
+        <h3> Transcribe Minutes </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter meeting audio or notes to transcribe minutes.</li>
+            <li>Accepts Text, File, and Youtube Link Input</li>
+        </ul>`,
+translate: `
+        <h3> Translate </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function translates the provided text into English.</li>
+            <li>It processes the input and delivers an accurate translation.</li>
+            <li>Provide text to translate into English.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Translation to English</li>
+        </ul>`,
+translate_in_hindi: `
+        <h3> Translate In Hindi </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function translates the provided text into Hindi.</li>
+            <li>It accurately converts the input text while maintaining the original meaning.</li>
+            <li>Provide text to translate into Hindi.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Translation to Hindi</li>
+        </ul>`,
+translate_in_marathi: `
+        <h3> Translate In Marathi </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>This function translates the provided text into Marathi, ensuring an accurate translation while retaining the essence of the original content.</li>
+            <li>Provide text to translate into Marathi.</li>
+            <li>Accepts Text, File, and YouTube Link Input for Translation to Marathi</li>
+        </ul>`,
+tweet: `
+        <h3> Tweet </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter text to generate a tweet or social media post with multiple emojis and relevant hashtags.</li>
+            <li>Enter a Text Input to Create a Tweet</li>
+        </ul>`,
+write_code: `
+        <h3> Write Code </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide functionality to generate code.</li>
+            <li>Enter a Text Input to Write Code</li>
+        </ul>`,
+write_essay: `
+        <h3> Write Essay </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter a topic to generate an essay draft.</li>
+            <li>Enter a Text Input to Write an Essay</li>
+        </ul>`,
+write_hackerone_report: `
+        <h3> Write Hackerone Report </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide issue details to create a HackerOne report.</li>
+            <li>Enter a Text Input to Write a HackerOne Report</li>
+        </ul>`,
+write_latex: `
+        <h3> Write Latex </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter content to generate LaTeX code.</li>
+            <li>Enter a Text Input to Write LaTeX Code</li>
+        </ul>`,
+write_micro_essay: `
+        <h3> Write Micro Essay </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Provide a topic to generate a short essay.</li>
+            <li>Enter a Text Input to Write a Micro Essay</li>
+        </ul>`,
+write_nuclei_template_rule: `
+        <h3> Write Nuclei Template Rule </h3>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Enter security criteria to generate a Nuclei template rule.</li>
+            <li>Enter a Text Input to Write a Nuclei Template Rule</li>
+        </ul>`
 
-   <option value="ai">AI</option>
-   <option value="ai_long">AI (Long Answers)</option>    
-<option value="analyze_answers">Analyze Answers</option>
-<option value="analyze_cfp_submission">Analyze CFP Submission</option>
-<option value="analyze_claims">Analyze Claims</option>
-<option value="analyze_comments">Analyze Comments</option>
-<option value="analyze_debate">Analyze Debate</option>
-<option value="analyze_email_headers">Analyze Email Headers</option>
-<option value="analyze_incident">Analyze Incident</option>
-<option value="analyze_interviewer_techniques">Analyze Interviewer Techniques</option>
-<option value="analyze_logs">Analyze Logs</option>
-<option value="analyze_malware">Analyze Malware</option>
-<option value="analyze_military_strategy">Analyze Military Strategy</option>
-<option value="analyze_paper">Analyze Paper</option>
-<option value="analyze_patent">Analyze Patent</option>
-<option value="analyze_personality">Analyze Personality</option>
-<option value="analyze_presentation">Analyze Presentation</option>
-<option value="analyze_product_feedback">Analyze Product Feedback</option>
-<option value="analyze_proposition">Analyze Proposition</option>
-<option value="analyze_prose">Analyze Prose</option>
-<option value="analyze_prose_json">Analyze Prose JSON</option>
-<option value="analyze_prose_pinker">Analyze Prose (Pinker Style)</option>
-<option value="analyze_sales_call">Analyze Sales Call</option>
-<option value="analyze_tech_impact">Analyze Tech Impact</option>
-<option value="analyze_threat_report">Analyze Threat Report</option>
-<option value="analyze_threat_report_trends">Analyze Threat Report Trends</option>
-<option value="answer_interview_question">Answer Interview Question</option>
-<option value="ask_secure_by_design_questions">Ask Secure by Design Questions</option>
-<option value="devops_aws"> AWS DevOps</option>
-<option value="devops_azure"> Azure DevOps</option>
-<option value="capture_thinkers_work">Capture Thinkers' Work</option>
-<option value="check_agreement">Check Agreement</option>
-<option value="clean_text">Clean Text</option>
-<option value="coding_master">Coding Master</option>
-<option value="compare_and_contrast">Compare and Contrast</option>
-<option value="create_5_sentence_summary">Create a 5-Sentence Summary</option>
-<option value="create_academic_paper">Create Academic Paper</option>
-<option value="create_ai_jobs_analysis">Create AI Jobs Analysis</option>
-<option value="create_aphorisms">Create Aphorisms</option>
-<option value="create_art_prompt">Create Art Prompt</option>
-<option value="create_better_frame">Create a Better Frame</option>
-<option value="create_coding_project">Create Coding Project</option>
-<option value="create_command">Create Command</option>
-<option value="create_coverletter">Create Cover Letter</option>
-<option value="create_cyber_summary">Create Cyber Summary</option>
-<option value="create_design_document">Create Design Document</option>
-<option value="create_formal_email">Create Formal Email</option>
-<option value="create_git_diff_commit">Create Git Diff Commit</option>
-<option value="create_graph_from_input">Create Graph from Input</option>
-<option value="create_hormozi_offer">Create Hormozi Offer</option>
-<option value="create_idea_compass">Create Idea Compass</option>
-<option value="create_investigation_visualization">Create Investigation Visualization</option>
-<option value="create_keynote">Create Keynote</option>
-<option value="create_markmap_visualization">Create Markmap Visualization</option>
-<option value="create_mermaid_visualization">Create Mermaid Visualization</option>
-<option value="create_mermaid_visualization_for_github">Create Mermaid Visualization for GitHub</option>
-<option value="create_micro_summary">Create Micro Summary</option>
-<option value="create_network_threat_landscape">Create Network Threat Landscape</option>
-<option value="create_quiz">Create Quiz</option>
-<option value="create_reading_plan">Create Reading Plan</option>
-<option value="create_recursive_outline">Create Recursive Outline</option>
-<option value="create_report_finding">Create Report Finding</option>
-<option value="create_resume">Create Resume</option>
-<option value="create_rpg_summary">Create RPG Summary</option>
-<option value="create_security_update">Create Security Update</option>
-<option value="create_show_intro">Create Show Intro</option>
-<option value="create_story_explanation">Create Story Explanation</option>
-<option value="create_stride_threat_model">Create STRIDE Threat Model</option>
-<option value="create_tags">Create Tags</option>
-<option value="create_threat_scenarios">Create Threat Scenarios</option>
-<option value="create_upgrade_pack">Create Upgrade Pack</option>
-<option value="create_user_story">Create User Story</option>
-<option value="create_video_chapters">Create Video Chapters</option>
-<option value="create_visualization">Create Visualization</option>
-<option value="deploy_web_app">Deploy Web App</option>
-<option value="explain_code">Explain Code</option>
-<option value="explain_docs">Explain Docs</option>
-<option value="explain_math">Explain Math</option>
-<option value="explain_project">Explain Project</option>
-<option value="explain_terms">Explain Terms</option>
-<option value="export_data_as_csv">Export Data as CSV</option>
-<option value="extract_algorithm_update_recommendations">Extract Algorithm Update Recommendations</option>
-<option value="extract_article_wisdom">Extract Article Wisdom</option>
-<option value="extract_book_ideas">Extract Book Ideas</option>
-<option value="extract_book_recommendations">Extract Book Recommendations</option>
-<option value="extract_business_ideas">Extract Business Ideas</option>
-<option value="extract_controversial_ideas">Extract Controversial Ideas</option>
-<option value="extract_core_message">Extract Core Message</option>
-<option value="extract_ctf_writeup">Extract CTF Writeup</option>
-<option value="extract_extraordinary_claims">Extract Extraordinary Claims</option>
-<option value="extract_ideas">Extract Ideas</option>
-<option value="extract_insights">Extract Insights</option>
-<option value="extract_instructions">Extract Instructions</option>
-<option value="extract_jokes">Extract Jokes</option>
-<option value="extract_main_idea">Extract Main Idea</option>
-<option value="extract_most_redeeming_thing">Extract Most Redeeming Thing</option>
-<option value="extract_poc">Extract Proof of Concept</option>
-<option value="extract_predictions">Extract Predictions</option>
-<option value="extract_primary_problem">Extract Primary Problem</option>
-<option value="extract_primary_solution">Extract Primary Solution</option>
-<option value="extract_product_features">Extract Product Features</option>
-<option value="extract_questions">Extract Questions</option>
-<option value="extract_recommendations">Extract Recommendations</option>
-<option value="extract_references">Extract References</option>
-<option value="extract_skills">Extract Skills</option>
-<option value="extract_song_meaning">Extract Song Meaning</option>
-<option value="extract_videoid">Extract Video ID</option>
-<option value="extract_wisdom">Extract Wisdom</option>
-<option value="find_hidden_message">Find Hidden Message</option>
-<option value="find_logical_fallacies">Find Logical Fallacies</option>
-<option value="generate_ideas">Generate Ideas</option>
-<option value="get_wow_per_minute">Get WOW per Minute</option>
-<option value="devops"> GCP DevOps</option>
-<option value="identify_dsrp_distinctions">Identify DSRP Distinctions</option>
-<option value="identify_dsrp_perspectives">Identify DSRP Perspectives</option>
-<option value="identify_dsrp_relationships">Identify DSRP Relationships</option>
-<option value="identify_dsrp_systems">Identify DSRP Systems</option>
-<option value="identify_job_stories">Identify Job Stories</option>
-<option value="improve_academic_writing">Improve Academic Writing</option>
-<option value="improve_prompt">Improve Prompt</option>
-<option value="improve_report_finding">Improve Report Finding</option>
-<option value="improve_writing">Improve Writing</option>
-<option value="label_and_rate">Label and Rate</option>
-<option value="prepare_7s_strategy">Prepare 7S Strategy</option>
-<option value="provide_guidance">Provide Guidance</option>
-<option value="rate_content">Rate Content</option>
-<option value="rate_value">Rate Value</option>
-<option value="raw_query">Raw Query</option>
-<option value="raycast">Raycast</option>
-<option value="recommend_artists">Recommend Artists</option>
-<option value="recommend_pipeline_upgrades">Recommend Pipeline Upgrades</option>
-<option value="recommend_talkpanel_topics">Recommend Talk Panel Topics</option>
-<option value="solve_with_cot">Solve with Chain of Thought</option>
-<option value="summarize">Summarize</option>
-<option value="summarize_debate">Summarize Debate</option>
-<option value="summarize_lecture">Summarize Lecture</option>
-<option value="summarize_legislation">Summarize Legislation</option>
-<option value="summarize_micro">Summarize Micro</option>
-<option value="summarize_newsletter">Summarize Newsletter</option>
-<option value="summarize_paper">Summarize Paper</option>
-<option value="summarize_prompt">Summarize Prompt</option>
-<option value="test_result">Test Result</option>
-<option value="to_flashcards">Convert to Flashcards</option>
-<option value="transcribe_minutes">Transcribe Minutes</option>
-<option value="translate">Translate to English</option>
-<option value="translate_in_hindi">Translate to Hindi</option>
-<option value="translate_in_marathi">Translate to Marathi </option>
-<option value="tweet">Tweet</option>
-<option value="write_code">Write Code</option>
-<option value="write_essay">Write an Essay</option>
-<option value="write_hackerone_report">Write HackerOne Report</option>
-<option value="write_latex">Write LaTeX</option>
-<option value="write_micro_essay">Write Micro Essay</option>
-<option value="write_nuclei_template_rule">Write Nuclei Template Rule</option>
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+
+    $(document).ready(function () {
+        // Initialize Select2
+        $('.function_select_dropdown').select2({
+            placeholder: "Select a pattern...",
+            allowClear: true,
+            dropdownAutoWidth: true
+        });
+
+        // Placeholder Mapping
+        const patternPlaceholders = {
+            ai: "Enter a message to communicate with AI.",
+            ai_long: "Enter detailed text for long AI answers.",
+            analyze_answers: "Analyze Answers based on the relevance to the topic/question asked",
+            analyze_cfp_submission: "Provide CFP submission details for analysis.",
+            analyze_claims: "Analyze Claims made in text to check their validity",
+            analyze_comments: "Paste comments to assess tone, subject and relevance.",
+            analyze_debate: "Provide transcript/text of a debate to analyze arguments and strategies.",
+            analyze_email_headers: "Paste email headers for analysis.",
+            analyze_incident: "Provide Log data to Analyze Incident",
+            analyze_interviewer_techniques: "Provide Transcript of an interview to evaluate interviewer techniques.",
+            analyze_logs: "Provide Logs to Analyze via Text or Files",
+            analyze_malware: "Provide malware data for analysis.",
+            analyze_military_strategy: "Enter military strategy details for evaluation.",
+            analyze_paper: "Provide research paper content for analysis.",
+            analyze_patent: "Provide Patent Data to analyze innovation and relevance.",
+            analyze_personality: "Analyze their personality traits of a person from conversation or text",
+            analyze_presentation: "Provide presentation details for critique and suggestions.",
+            analyze_product_feedback: "Enter product feedback for analysis.",
+            analyze_proposition: "Describe a proposition to analyze its viability.",
+            analyze_prose: "Paste a prose via text to analyze style and content.",
+            analyze_prose_json: "Provide JSON-structured prose for analysis.",
+            analyze_prose_pinker: "Paste prose for analysis in Pinker style.",
+            analyze_sales_call: "Paste Transcript of a Sales call to Analyze.",
+            analyze_tech_impact: "Analyze Tech Impact on a proposed or existing solution",
+            analyze_threat_report: "Provide a threat report for detailed analysis.",
+            analyze_threat_report_trends: "Enter threat reports to analyze vulnerability or securitytrends.",
+            answer_interview_question: "Enter an interview question to generate an answer as per HR standards.",
+            ask_secure_by_design_questions: "Generate security-focused questions based on the topic entered.",
+            devops_aws: "Input your Github Link for your project to build a full-fledged DevOps Code with AWS Infrastructure ",
+            devops_azure: "Input your Github Link for your project to build a full-fledged DevOps Code with Azure Infrastructure",
+            capture_thinkers_work: "Analyze Thinking from Authored Text, Transcripts and Philosophical Inputs",
+            check_agreement: "Provide content to check agreement across perspectives.",
+            clean_text: "Paste text to clean and standardize.",
+            coding_master: "Describe requirements in the programming language of your choice for advanced code generation.",
+            compare_and_contrast: "Provide items or concepts to compare and contrast.",
+            create_5_sentence_summary: "Enter content to generate a concise five-sentence summary.",
+            create_academic_paper: "Provide a topic to generate an academic paper draft.",
+            create_ai_jobs_analysis: "Enter AI job data for analysis and trends.",
+            create_aphorisms: "Provide a theme to generate aphorisms.",
+            create_art_prompt: "Describe art ideas to generate prompts.",
+            create_better_frame: "Provide an argument or idea to reframe it effectively.",
+            create_coding_project: "Describe a coding project for structure planning and code generation",
+            create_command: "Provide functionality to generate appropriate commands.",
+            create_coverletter: "Enter job and personal details to generate a cover letter.",
+            create_cyber_summary: "Creates CyberSecurity Summary for your project",
+            create_design_document: "Provide requirements to generate a design document with mermaid",
+            create_formal_email: "Describe context to draft a formal email.",
+            create_git_diff_commit: "Provide code changes to generate a Git diff commit.",
+            create_graph_from_input: "Enter data to generate a graph representation.",
+            create_hormozi_offer: "Creates Hormozi Offer based on the formula.",
+            create_idea_compass: "Provide ideas to generate a directional idea compass.",
+            create_investigation_visualization: "Enter investigation details for visualization.",
+            create_keynote: "Provide topic details to create a keynote presentation.",
+            create_markmap_visualization: "Enter structured data to create a markmap visualization.",
+            create_mermaid_visualization: "Provide input to generate a mermaid visualization.",
+            create_mermaid_visualization_for_github: "Describe GitHub context or paste Github Link for a mermaid visualization.",
+            create_micro_summary: "Paste content to create a micro-summary.",
+            create_network_threat_landscape: "Enter network details to create a threat landscape.",
+            create_quiz: "Provide topic details to generate a quiz.",
+            create_reading_plan: "Enter book or content details to create a reading plan.",
+            create_recursive_outline: "Provide content for a recursive outline.",
+            create_report_finding: "Enter findings to generate a structured report.",
+            create_resume: "Provide personal and professional details to create a resume.",
+            create_rpg_summary: "Describe RPG details to generate a summary.",
+            create_security_update: "Enter security updates to create a structured report.",
+            create_show_intro: "Provide show details to generate an introduction.",
+            create_story_explanation: "Enter story details to generate an explanation.",
+            create_stride_threat_model: "Provide system details to create a STRIDE threat model.",
+            create_tags: "Describe content to generate relevant hashtags.",
+            create_threat_scenarios: "Enter system or data details to create threat scenarios.",
+            create_upgrade_pack: "Describe software or features to create an upgrade pack.",
+            create_user_story: "Provide requirements to create a user story.",
+            create_video_chapters: "Enter video transcript to generate chapters. Does not work with Youtube Links",
+            create_visualization: "Provide data to create visualizations in plain text",
+            deploy_web_app: "Describe web app to create a web app deployment",
+            explain_code: "Paste code to generate explanations.",
+            explain_docs: "Provide documentation to create simplified explanations.",
+            explain_math: "Enter math problems in text or LaTeX to generate step-by-step explanations.",
+            explain_project: "Provide project details for a concise explanation.",
+            explain_terms: "Enter terms to generate definitions and explanations.",
+            export_data_as_csv: "Provide data to generate a CSV export.",
+            extract_algorithm_update_recommendations: "Enter algorithm details for update suggestions.",
+            extract_article_wisdom: "Paste article content to extract key insights.",
+            extract_book_ideas: "Provide book details to generate related ideas.",
+            extract_book_recommendations: "Describe interests to extract book recommendations.",
+            extract_business_ideas: "Enter business context to generate ideas.",
+            extract_controversial_ideas: "Paste content to extract controversial ideas.",
+            extract_core_message: "Enter text to identify its core message.",
+            extract_ctf_writeup: "Paste CTF challenge details to generate a write-up.",
+            extract_extraordinary_claims: "Provide claims to identify extraordinary aspects.",
+            extract_ideas: "Paste text to generate related ideas.",
+            extract_insights: "Enter content to extract key insights.",
+            extract_instructions: "Provide text to extract actionable instructions.",
+            extract_jokes: "Paste content to extract humorous elements.",
+            extract_main_idea: "Enter content to identify the main idea.",
+            extract_most_redeeming_thing: "Paste content to extract its most redeeming aspect.",
+            extract_poc: "Provide concept details to extract proof of concept.",
+            extract_predictions: "Enter data to generate predictions.",
+            extract_primary_problem: "Describe scenarios to identify primary problems.",
+            extract_primary_solution: "Provide problem context to identify primary solutions.",
+            extract_product_features: "Enter product details to extract key features.",
+            extract_questions: "Paste content to extract relevant questions.",
+            extract_recommendations: "Provide data to generate recommendations.",
+            extract_references: "Enter text to extract references.",
+            extract_skills: "Describe a job or content to extract relevant skills.",
+            extract_song_meaning: "Paste song lyrics to interpret their meaning.",
+            extract_videoid: "Provide video URL to extract its ID.",
+            extract_wisdom: "Enter text to extract its wisdom and key insights.",
+            find_hidden_message: "Provide text to identify hidden messages.",
+            find_logical_fallacies: "Enter arguments to identify logical fallacies.",
+            generate_ideas: "Describe a topic to generate 5 creative ideas for projects.",
+            get_wow_per_minute: "Provide content to calculate the WOW rate.",
+            devops: "Input your Github Link for your project to build a full-fledged DevOps Code with GCP Infrastructure.",
+            identify_dsrp_distinctions: "Enter content to identify DSRP distinctions.",
+            identify_dsrp_perspectives: "Provide content to identify DSRP perspectives.",
+            identify_dsrp_relationships: "Describe systems to identify DSRP relationships.",
+            identify_dsrp_systems: "Enter details to identify DSRP systems.",
+            identify_job_stories: "Provide requirements to identify job stories.",
+            improve_academic_writing: "Provide academic text to improve structure and clarity.",
+            improve_prompt: "Enter a prompt to enhance for better output.",
+            improve_report_finding: "Provide report findings to refine and improve.",
+            improve_writing: "Enter text to improve readability and style.",
+            label_and_rate: "Provide content to label and rate based on specific criteria.",
+            prepare_7s_strategy: "Enter details to generate a McKinsey 7S strategy.",
+            provide_guidance: "Enter a question or scenario to receive technical guidance.",
+            rate_content: "Provide content to evaluate and rate its quality.",
+            rate_value: "Enter details to rate the value of an item or service.",
+            raw_query: "Enter a query for direct, unprocessed analysis.",
+            raycast: "Provide input to cast ray simulations or projections.",
+            recommend_artists: "Enter genre preferences to recommend music artists.",
+            recommend_pipeline_upgrades: "Provide pipeline details to suggest improvements.",
+            recommend_talkpanel_topics: "Enter context to recommend topics for discussion panels.",
+            solve_with_cot: "Provide a problem to generate a solution using the Chain of Thought approach.",
+            summarize: "Enter content to create a summary.",
+            summarize_debate: "Provide debate details to generate a concise summary.",
+            summarize_lecture: "Enter lecture details to create a summary.",
+            summarize_legislation: "Provide legislative text to generate a summary.",
+            summarize_micro: "Enter micro-level content to summarize.",
+            summarize_newsletter: "Provide newsletter content to generate a summary.",
+            summarize_paper: "Enter paper details to create a summary.",
+            summarize_prompt: "Provide a prompt to generate a concise summary.",
+            test_result: "Enter test details to interpret and report results.",
+            to_flashcards: "Provide content to generate text based flashcards.",
+            transcribe_minutes: "Enter meeting audio or notes to transcribe minutes.",
+            translate: "Provide text to translate into English.",
+            translate_in_hindi: "Provide text to translate into Hindi.",
+            translate_in_marathi: "Provide text to translate into Marathi.",
+            tweet: "Enter text to generate a tweet/social media post with multiple emojis and relevant Hashtags.",
+            write_code: "Provide functionality to generate code.",
+            write_essay: "Enter a topic to generate an essay draft.",
+            write_hackerone_report: "Provide issue details to create a HackerOne report.",
+            write_latex: "Enter content to generate LaTeX code.",
+            write_micro_essay: "Provide a topic to generate a short essay.",
+            write_nuclei_template_rule: "Enter security criteria to generate a Nuclei template rule."
+        };
+
+        // Update placeholder on pattern change
+        $('#pattern').on('change', function () {
+            const selectedPattern = document.getElementById('pattern').value;
+            const placeholder = patternPlaceholders[selectedPattern] || "Enter a message to communicate with AI";
+            $('#input').attr('placeholder', placeholder);
 
 
+            if(document.getElementById("helpPopUp").style.display == "flex") {
 
-        </select>
-</div>
-    <button class="submit-btn" onclick="handleSubmit()">Submit</button>
-    <div class="spinner" id="spinner"></div>
-    <div id="output" class="output-box"></div>
-</div>
-<script>
+                console.log(event.currentTarget.value)
+
+                document.getElementById("helpText").innerHTML = helpfiles[selectedPattern] || "No Help Available for this Pattern.";
+                
+            }
+    })
+
+
+        });
+    });
+
     function toggleInputMode(mode) {
         const textButton = document.getElementById("textMode");
         const fileButton = document.getElementById("fileUploadMode");
@@ -440,94 +2017,115 @@
         } else {
             fileInfo.textContent = "";
         }
-    }async function handleSubmit() {
-    const fileMode = document.getElementById("fileUploadMode").classList.contains("active");
-    const spinner = document.getElementById("spinner");
-    const outputBox = document.getElementById("output");
-    const pattern = document.getElementById("pattern").value;
-    const flag = document.getElementById("flag").value; // Get selected flag value
+    }
 
-    spinner.style.display = "block";
-    outputBox.textContent = "";
+        async function handleSubmit() {
+        const fileMode = document.getElementById("fileUploadMode").classList.contains("active");
+        const spinner = document.getElementById("spinner");
+        const outputBox = document.getElementById("output");
+        const pattern = document.getElementById("pattern").value;
+        const flag = document.getElementById("flag").value; // Get selected flag value
 
-    let input = document.getElementById("input").value;
+        spinner.style.display = "block";
+        outputBox.textContent = "";
 
-    if (fileMode) {
-        const file = fileInput.files[0];
-        if (!file) {
-            alert("Please upload a file.");
-            spinner.style.display = "none";
-            return;
+        let input = document.getElementById("input").value;
+
+        if (fileMode) {
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please upload a file.");
+                spinner.style.display = "none";
+                return;
+            }
+
+            const fileExtension = file.name.split(".").pop().toLowerCase();
+
+            try {
+                if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
+                    try {
+                        const { data: { text } } = await Tesseract.recognize(file, 'eng');
+                        input = text;
+                    } catch (error) {
+                        outputBox.textContent = "Error processing OCR: " + error.message;
+                        spinner.style.display = "none";
+                        return;
+                    }
+                } else if (fileExtension === "txt") {
+                    const text = await file.text();
+                    input = text;
+                } else if (fileExtension === "pdf") {
+                    const pdfjsLib = window['pdfjs-dist/build/pdf'];
+                    const pdfData = await file.arrayBuffer();
+                    const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+                    let text = "";
+                    for (let i = 1; i <= pdf.numPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const content = await page.getTextContent();
+                        text += content.items.map(item => item.str).join(" ");
+                    }
+                    input = text;
+                } else if (fileExtension === "docx") {
+                    const arrayBuffer = await file.arrayBuffer();
+                    const { value: text } = await mammoth.extractRawText({ arrayBuffer });
+                    input = text;
+                } else {
+                    throw new Error("Unsupported file format.");
+                }
+            } catch (error) {
+                outputBox.textContent = "Error processing file: " + error.message;
+                spinner.style.display = "none";
+                return;
+            }
         }
-
-        const fileExtension = file.name.split(".").pop().toLowerCase();
 
         try {
-            if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
-                try {
-                    const { data: { text } } = await Tesseract.recognize(file, 'eng');
-                    input = text;
-                } catch (error) {
-                    outputBox.textContent = "Error processing OCR: " + error.message;
-                    spinner.style.display = "none";
-                    return;
-                }
-            } else if (fileExtension === "txt") {
-                // Handle plain text files
-                const text = await file.text();
-                input = text;
-            } else if (fileExtension === "pdf") {
-                // Handle PDF files using PDF.js
-                const pdfjsLib = window['pdfjs-dist/build/pdf'];
-                const pdfData = await file.arrayBuffer();
-                const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
-                let text = "";
-                for (let i = 1; i <= pdf.numPages; i++) {
-                    const page = await pdf.getPage(i);
-                    const content = await page.getTextContent();
-                    text += content.items.map(item => item.str).join(" ");
-                }
-                input = text;   
-            } else if (fileExtension === "docx") {
-                // Handle Word files using Mammoth.js
-                const arrayBuffer = await file.arrayBuffer();
-                const { value: text } = await mammoth.extractRawText({ arrayBuffer });
-                input = text;
-            } else {
-                throw new Error("Unsupported file format.");
+            const requestBody = { input, pattern_name: pattern };
+            if (flag) {
+                requestBody.flag = flag;
             }
+
+            const response = await fetch("http://34.47.150.28:8080/run-command", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestBody)
+            });
+
+            const responseData = await response.json();
+            outputBox.textContent = responseData.output || "No output returned.";
         } catch (error) {
-            outputBox.textContent = "Error processing file: " + error.message;
+            outputBox.textContent = `Error: ${error.message}`;
+        } finally {
             spinner.style.display = "none";
-            return;
         }
     }
-
-    try {
-        const requestBody = { input, pattern_name: pattern };
-        if (flag) {
-            requestBody.flag = flag; // Add flag only if selected
-        }
-
-        const response = await fetch("http://34.47.150.28:8080/run-command", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestBody)
-        });
-
-        const responseData = await response.json();
-        outputBox.textContent = responseData.output || "No output returned.";
-    } catch (error) {
-        outputBox.textContent = `Error: ${error.message}`;
-    } finally {
-        spinner.style.display = "none";
-    }
-}
 
     $(document).ready(function(){
         $('.function_select_dropdown').select2();
+    });
+
+    
+    const helpPopUp = document.querySelector("#helpPopUp");
+document.getElementById("helpButton").addEventListener("click", () => {
+    if (helpPopUp.style.display === "flex") {
+        helpPopUp.style.display = "none";
+    } else {
+        helpPopUp.style.display = "flex";
+        const pattern = document.getElementById("pattern").value;
+        console.log(pattern);
+        const helpText = document.getElementById("helpText");
+        helpText.innerHTML = helpfiles[pattern] || "No Help Available for this Pattern";
+    }
+});
+
+
+
+    document.getElementById("helpPopUpCloseBtn").addEventListener("click", ()=>{
+
+        helpPopUp.style.display = "none";
+        
+
     })
 
 </script>
-</body>
 </html>
