@@ -370,10 +370,6 @@ width: 80vw !important;
                 <div class="form-group" id="textInputGroup">
                     <div class="text-input-title">
                         <label for="input">Text Input</label>
-                        <button id="helpButton">
-
-                            ?
-                        </button>
                     </div>
                     <textarea id="input" placeholder="Enter a message to communicate with AI"
                         rows="4"></textarea>
@@ -384,10 +380,6 @@ width: 80vw !important;
                     <div class="text-input-title">
                     <label for="file">Supported formats: .jpeg, .jpg, .png,
                         .docx, .txt, .pdf(BETA)</label>
-                        <button id="helpButton">
-
-                            ?
-                        </button>
                     </div>
                     <div class="drag-area" id="dragArea">
                         Drag & Drop File Here or Click to Select
@@ -411,7 +403,10 @@ width: 80vw !important;
                 </div>
 
                 <div class="form-group">
-                    <label for="pattern">Select Function</label>
+                    <label for="pattern">Select Function	<button id="helpButton">
+                        &#x1D456;
+                    </button>
+		</label>
                     <select class="function_select_dropdown" id="pattern">
 
                         <option value="ai">AI</option>
@@ -677,11 +672,7 @@ width: 80vw !important;
                             Essay</option>
                         <option value="write_nuclei_template_rule">Write Nuclei
                             Template Rule</option>
-
                     </select>
-
-                   
-
                 </div>
                 <button class="submit-btn" onclick="handleSubmit()">Submit</button>
 
@@ -1773,7 +1764,7 @@ write_nuclei_template_rule: `
     $(document).ready(function () {
         // Initialize Select2
         $('.function_select_dropdown').select2({
-            placeholder: "Select a pattern...",
+            placeholder: "Text Input ",
             allowClear: true,
             dropdownAutoWidth: true
         });
